@@ -47,6 +47,9 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+**/.DS_Store
+Pods/
+/MFlix/MFlix/Utils/APIKey.swift
 
 # CocoaPods
 #
