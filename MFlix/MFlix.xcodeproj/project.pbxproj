@@ -1,0 +1,481 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03B86CC5DA7065ED1AF32C7E /* Pods_MFlix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB890E44C403FDDF4C020D3 /* Pods_MFlix.framework */; };
+		5656D7C22460EEC50046FBC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656D7C12460EEC50046FBC8 /* AppDelegate.swift */; };
+		5656D7C42460EEC50046FBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656D7C32460EEC50046FBC8 /* SceneDelegate.swift */; };
+		5656D7C62460EEC50046FBC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656D7C52460EEC50046FBC8 /* ViewController.swift */; };
+		5656D7C92460EEC50046FBC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5656D7C72460EEC50046FBC8 /* Main.storyboard */; };
+		5656D7CB2460EEC90046FBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5656D7CA2460EEC90046FBC8 /* Assets.xcassets */; };
+		5656D7CE2460EEC90046FBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5656D7CC2460EEC90046FBC8 /* LaunchScreen.storyboard */; };
+		56F2EB452460F7A900826590 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F2EB442460F7A900826590 /* Constants.swift */; };
+		56F2EB472460F7B600826590 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F2EB462460F7B600826590 /* URLs.swift */; };
+		56F2EB492460F7C900826590 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F2EB482460F7C900826590 /* APIKey.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5656D7BE2460EEC50046FBC8 /* MFlix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MFlix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5656D7C12460EEC50046FBC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5656D7C32460EEC50046FBC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5656D7C52460EEC50046FBC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5656D7C82460EEC50046FBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5656D7CA2460EEC90046FBC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5656D7CD2460EEC90046FBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5656D7CF2460EEC90046FBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56F2EB442460F7A900826590 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		56F2EB462460F7B600826590 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		56F2EB482460F7C900826590 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		664D6D4BF30315BD38674851 /* Pods-MFlix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MFlix.debug.xcconfig"; path = "Target Support Files/Pods-MFlix/Pods-MFlix.debug.xcconfig"; sourceTree = "<group>"; };
+		AA2648831EF938088BC38589 /* Pods-MFlix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MFlix.release.xcconfig"; path = "Target Support Files/Pods-MFlix/Pods-MFlix.release.xcconfig"; sourceTree = "<group>"; };
+		FCB890E44C403FDDF4C020D3 /* Pods_MFlix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MFlix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5656D7BB2460EEC50046FBC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03B86CC5DA7065ED1AF32C7E /* Pods_MFlix.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5656D7B52460EEC50046FBC8 = {
+			isa = PBXGroup;
+			children = (
+				5656D7C02460EEC50046FBC8 /* MFlix */,
+				5656D7BF2460EEC50046FBC8 /* Products */,
+				A6675A78BBCA96BB263929E3 /* Pods */,
+				6AA29103FDF9FED4F7B23B61 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5656D7BF2460EEC50046FBC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5656D7BE2460EEC50046FBC8 /* MFlix.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5656D7C02460EEC50046FBC8 /* MFlix */ = {
+			isa = PBXGroup;
+			children = (
+				5656D7CF2460EEC90046FBC8 /* Info.plist */,
+				56F2EB432460F73C00826590 /* Application */,
+				56F2EB3D2460F6E600826590 /* Utils */,
+				56F2EB422460F72700826590 /* Resources */,
+				56F2EB3E2460F6F100826590 /* Extensions */,
+				56F2EB3F2460F6FA00826590 /* Domain */,
+				56F2EB402460F6FF00826590 /* Platform */,
+				56F2EB412460F70700826590 /* Scenes */,
+			);
+			path = MFlix;
+			sourceTree = "<group>";
+		};
+		56F2EB3D2460F6E600826590 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				56F2EB442460F7A900826590 /* Constants.swift */,
+				56F2EB462460F7B600826590 /* URLs.swift */,
+				56F2EB482460F7C900826590 /* APIKey.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		56F2EB3E2460F6F100826590 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		56F2EB3F2460F6FA00826590 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		56F2EB402460F6FF00826590 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		56F2EB412460F70700826590 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				5656D7C52460EEC50046FBC8 /* ViewController.swift */,
+				5656D7C72460EEC50046FBC8 /* Main.storyboard */,
+				5656D7CC2460EEC90046FBC8 /* LaunchScreen.storyboard */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		56F2EB422460F72700826590 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5656D7CA2460EEC90046FBC8 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		56F2EB432460F73C00826590 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5656D7C12460EEC50046FBC8 /* AppDelegate.swift */,
+				5656D7C32460EEC50046FBC8 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		6AA29103FDF9FED4F7B23B61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCB890E44C403FDDF4C020D3 /* Pods_MFlix.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6675A78BBCA96BB263929E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				664D6D4BF30315BD38674851 /* Pods-MFlix.debug.xcconfig */,
+				AA2648831EF938088BC38589 /* Pods-MFlix.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5656D7BD2460EEC50046FBC8 /* MFlix */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5656D7D22460EEC90046FBC8 /* Build configuration list for PBXNativeTarget "MFlix" */;
+			buildPhases = (
+				F6A770BDCCF2BC441E2ABE0F /* [CP] Check Pods Manifest.lock */,
+				5656D7BA2460EEC50046FBC8 /* Sources */,
+				5656D7BB2460EEC50046FBC8 /* Frameworks */,
+				5656D7BC2460EEC50046FBC8 /* Resources */,
+				C156EF49EB33371ADD5FDE97 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MFlix;
+			productName = MFlix;
+			productReference = 5656D7BE2460EEC50046FBC8 /* MFlix.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5656D7B62460EEC50046FBC8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = VietAnh;
+				TargetAttributes = {
+					5656D7BD2460EEC50046FBC8 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 5656D7B92460EEC50046FBC8 /* Build configuration list for PBXProject "MFlix" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5656D7B52460EEC50046FBC8;
+			productRefGroup = 5656D7BF2460EEC50046FBC8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5656D7BD2460EEC50046FBC8 /* MFlix */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5656D7BC2460EEC50046FBC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5656D7CE2460EEC90046FBC8 /* LaunchScreen.storyboard in Resources */,
+				5656D7CB2460EEC90046FBC8 /* Assets.xcassets in Resources */,
+				5656D7C92460EEC50046FBC8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C156EF49EB33371ADD5FDE97 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MFlix/Pods-MFlix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MFlix/Pods-MFlix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MFlix/Pods-MFlix-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6A770BDCCF2BC441E2ABE0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MFlix-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5656D7BA2460EEC50046FBC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56F2EB472460F7B600826590 /* URLs.swift in Sources */,
+				5656D7C62460EEC50046FBC8 /* ViewController.swift in Sources */,
+				5656D7C22460EEC50046FBC8 /* AppDelegate.swift in Sources */,
+				5656D7C42460EEC50046FBC8 /* SceneDelegate.swift in Sources */,
+				56F2EB492460F7C900826590 /* APIKey.swift in Sources */,
+				56F2EB452460F7A900826590 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5656D7C72460EEC50046FBC8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5656D7C82460EEC50046FBC8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5656D7CC2460EEC90046FBC8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5656D7CD2460EEC90046FBC8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5656D7D02460EEC90046FBC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5656D7D12460EEC90046FBC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5656D7D32460EEC90046FBC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 664D6D4BF30315BD38674851 /* Pods-MFlix.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q6C5SPDBTU;
+				INFOPLIST_FILE = MFlix/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.MFlix;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5656D7D42460EEC90046FBC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA2648831EF938088BC38589 /* Pods-MFlix.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q6C5SPDBTU;
+				INFOPLIST_FILE = MFlix/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.MFlix;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5656D7B92460EEC50046FBC8 /* Build configuration list for PBXProject "MFlix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5656D7D02460EEC90046FBC8 /* Debug */,
+				5656D7D12460EEC90046FBC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5656D7D22460EEC90046FBC8 /* Build configuration list for PBXNativeTarget "MFlix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5656D7D32460EEC90046FBC8 /* Debug */,
+				5656D7D42460EEC90046FBC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5656D7B62460EEC50046FBC8 /* Project object */;
+}
