@@ -7,12 +7,9 @@
 //
 
 import UIKit
-import RxCocoa
-import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    private let disposeBag = DisposeBag()
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -30,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let output = viewModel.transform(input)
         output.toMainTabBar
             .drive()
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
     }
     
 }

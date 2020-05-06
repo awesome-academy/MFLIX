@@ -6,11 +6,6 @@
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-import Foundation
-import RxSwift
-import RxCocoa
-import Then
-
 protocol AppNavigatorType {
     func toMainTabBar()
 }

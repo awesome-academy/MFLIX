@@ -6,9 +6,6 @@
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-import Foundation
-import UIKit
-
 protocol WatchNowNavigatorType {
     
 }

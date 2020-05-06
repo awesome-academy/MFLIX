@@ -15,5 +15,4 @@ enum Storyboards {
     static let favorite = UIStoryboard(name: "Favorite", bundle: nil)
     static let movieDetail = UIStoryboard(name: "MovieDetail", bundle: nil)
     static let seeAll = UIStoryboard(name: "SeeAll", bundle: nil)
-    
 }

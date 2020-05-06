@@ -6,28 +6,23 @@
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-import UIKit
-import Foundation
-import RxSwift
-import RxCocoa
-import Then
-import NSObject_Rx
-import MGArchitecture
-import Reusable
-
 class WatchNowViewController: UIViewController, BindableType {
     
     var viewModel: WatchNowViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Watch Now"
+        configView()
+    }
+    
+    private func configView() {
+        navigationItem.title = Constants.watchNowString
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func bindViewModel() {
     }
-
+    
 }
 
 extension WatchNowViewController: StoryboardSceneBased {

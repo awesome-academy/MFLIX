@@ -6,11 +6,6 @@
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-import Foundation
-import RxSwift
-import RxCocoa
-import MGArchitecture
-
 struct AppViewModel {
     let navigator: AppNavigatorType
     let useCase: AppUseCaseType
@@ -27,9 +22,7 @@ extension AppViewModel: ViewModelType {
     
     func transform(_ input: AppViewModel.Input) -> AppViewModel.Output {
         let toMainTabBar = input.loadTrigger
-            .do(onNext: { _ in
-                self.navigator.toMainTabBar()
-            })
+            .do(onNext: self.navigator.toMainTabBar)
         
         return Output(
             toMainTabBar: toMainTabBar
