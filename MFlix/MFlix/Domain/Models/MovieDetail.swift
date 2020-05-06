@@ -13,22 +13,24 @@ struct MovieDetail {
     var id = 0
     var originalTitle = ""
     var overview = ""
-    var releaseDate = Date()
     var tagline = ""
     var title = ""
-    var video = false
+    var hasVideo = false
     private var backdropPath = ""
     private var posterPath = ""
     
     var posterImageOriginalUrl: String {
         return URLs.Image.original + posterPath
     }
+    
     var posterImageW500Url: String {
         return URLs.Image.w500 + posterPath
     }
+    
     var backdropImageOPriginalUrl: String {
         return URLs.Image.original + backdropPath
     }
+    
     var backdropImageW500Url: String {
         return URLs.Image.w500 + backdropPath
     }
@@ -47,10 +49,9 @@ extension MovieDetail: BaseModel {
         originalTitle <- map["original_title"]
         overview <- map["overview"]
         posterPath <- map["poster_path"]
-        releaseDate <- (map["release_date"], DateTransform())
         tagline <- map["tagline"]
         title <- map["title"]
-        video <- map["video"]
+        hasVideo <- map["video"]
         
     }
 }

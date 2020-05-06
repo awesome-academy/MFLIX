@@ -18,12 +18,15 @@ struct Movie {
     var posterImageOriginalUrl: String {
         return URLs.Image.original + posterPath
     }
+    
     var posterImageW500Url: String {
         return URLs.Image.w500 + posterPath
     }
-    var backdropImageOPriginalUrl: String {
+    
+    var backdropImageOriginalUrl: String {
         return URLs.Image.original + backdropPath
     }
+    
     var backdropImageW500Url: String {
         return URLs.Image.w500 + backdropPath
     }
@@ -40,6 +43,5 @@ extension Movie: BaseModel {
         backdropPath <- map["backdrop_path"]
         originalTitle <- map["original_title"]
         title <- map["title"]
-        
     }
 }
