@@ -1,12 +1,14 @@
 //
-//  Constants.swift
+//  BaseModel.swift
 //  MFlix
 //
 //  Created by Viet Anh on 5/5/20.
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-import Foundation
+import ObjectMapper
 
-struct Constants {
+protocol BaseModel: Mappable {
+    
 }
+
