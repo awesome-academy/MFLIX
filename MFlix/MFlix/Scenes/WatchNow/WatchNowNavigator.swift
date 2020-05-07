@@ -7,9 +7,16 @@
 //
 
 protocol WatchNowNavigatorType {
-    
+    func toMovieDetailScreen(movieId: Int)
+    func toSeeAllScreen()
 }
 
 struct WatchNowNavigator: WatchNowNavigatorType {
     unowned let navigationController: UINavigationController
+    
+    func toMovieDetailScreen(movieId: Int) {
+    }
+    
+    func toSeeAllScreen() {
+    }
 }

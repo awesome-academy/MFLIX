@@ -18,5 +18,9 @@ enum URLs {
     enum API {
         private static var apiBaseURL = "https://api.themoviedb.org/3"
         static let movie = apiBaseURL + "/movie"
+        static let upcoming = apiBaseURL + "/movie/upcoming"
+        static let nowPlaying = apiBaseURL + "/movie/now_playing"
+        static let popular = apiBaseURL + "/movie/popular"
+        static let topRated = apiBaseURL + "/movie/top_rated"
     }
 }
