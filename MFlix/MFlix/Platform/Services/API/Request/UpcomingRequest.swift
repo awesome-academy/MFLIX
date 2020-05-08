@@ -11,7 +11,7 @@ import Foundation
 final class UpcomingRequest: BaseRequest {
     
     required init(page: Int) {
-        let body: [String: Any]  = [
+        let body: [String: Any] = [
             "api_key": APIKey.apiKey,
             "page": page
         ]

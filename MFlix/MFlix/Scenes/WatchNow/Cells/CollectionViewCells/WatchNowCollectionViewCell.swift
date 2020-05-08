@@ -10,10 +10,10 @@ import UIKit
 
 final class WatchNowCollectionViewCell: UICollectionViewCell, NibReusable {
     
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var movieImageView: UIImageView!
     
     func setContentForCell(_ movie: Movie) {
-        imageView.sd_setImage(with: URL(string: movie.backdropImageOriginalUrl),
+        movieImageView.sd_setImage(with: URL(string: movie.backdropImageOriginalUrl),
                               placeholderImage: UIImage(named: "movie_placeholder"))
     }
 }

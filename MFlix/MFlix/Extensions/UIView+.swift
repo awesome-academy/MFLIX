@@ -8,7 +8,8 @@
 
 import Foundation
 
-@IBDesignable extension UIView {
+@IBDesignable
+extension UIView {
     
     func makeRounded() {
         layer.masksToBounds = false
@@ -22,34 +23,31 @@ import Foundation
         clipsToBounds = true
     }
     
-    @IBInspectable var borderWidth: CGFloat {
+    @IBInspectable
+    var borderWidth: CGFloat {
         set {
-            DispatchQueue.main.async {
-                self.layer.borderWidth = newValue
-            }
+            self.layer.borderWidth = newValue
         }
         get {
             return layer.borderWidth
         }
     }
     
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable
+    var cornerRadius: CGFloat {
         set {
-            DispatchQueue.main.async {
-                self.layer.cornerRadius = newValue
-            }
+            self.layer.cornerRadius = newValue
         }
         get {
             return layer.cornerRadius
         }
     }
     
-    @IBInspectable var borderColor: UIColor? {
+    @IBInspectable
+    var borderColor: UIColor? {
         set {
             guard let uiColor = newValue else { return }
-            DispatchQueue.main.async {
-                self.layer.borderColor = uiColor.cgColor
-            }
+            self.layer.borderColor = uiColor.cgColor
         }
         get {
             guard let color = layer.borderColor else { return nil }
@@ -58,13 +56,13 @@ import Foundation
     }
     
     func setGradientBackground(colorTop: UIColor, colorBottom: UIColor) {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorBottom.cgColor, colorTop.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.locations = [0, 1]
-        gradientLayer.frame = bounds
-        
+        let gradientLayer = CAGradientLayer().then {
+            $0.colors = [colorBottom.cgColor, colorTop.cgColor]
+            $0.startPoint = CGPoint(x: 0.5, y: 1.0)
+            $0.endPoint = CGPoint(x: 0.5, y: 0.0)
+            $0.locations = [0, 1]
+            $0.frame = bounds
+        }
         layer.insertSublayer(gradientLayer, at: 0)
     }
 }

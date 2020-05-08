@@ -22,29 +22,29 @@ class WatchNowRepository: WatchNowRepositoryType {
     
     func getUpcomingMovies(input: UpcomingRequest) -> Observable<[Movie]> {
         return api.request(input: input)
-            .map{ (response: WatchNowResponse) in
+            .map { (response: WatchNowResponse) in
                 return response.movies
-        }
+            }
     }
     
     func getTopRatedMovies(input: TopRatedRequest) -> Observable<[Movie]> {
         return api.request(input: input)
-            .map{ (response: WatchNowResponse) in
+            .map { (response: WatchNowResponse) in
                 return response.movies
-        }
+            }
     }
     
     func getPopularMovies(input: PopularRequest) -> Observable<[Movie]> {
         return api.request(input: input)
-            .map{ (response: WatchNowResponse) in
+            .map { (response: WatchNowResponse) in
                 return response.movies
-        }
+            }
     }
     
     func getNowPlayingMovies(input: NowPlayingRequest) -> Observable<[Movie]> {
         return api.request(input: input)
-            .map{ (response: WatchNowResponse) in
+            .map { (response: WatchNowResponse) in
                 return response.movies
-        }
+            }
     }
 }
