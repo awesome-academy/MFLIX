@@ -9,7 +9,6 @@
 final class WatchNowViewController: UIViewController, BindableType {
     
     @IBOutlet private weak var tableView: UITableView!
-    typealias DataSource = RxTableViewSectionedReloadDataSource
     var viewModel: WatchNowViewModel!
     
     override func viewDidLoad() {
@@ -30,37 +29,33 @@ final class WatchNowViewController: UIViewController, BindableType {
     private func configTableView() {
         tableView.do {
             $0.register(cellType: WatchNowTableViewCell.self)
-            $0.rowHeight = 200
+            $0.rowHeight = UITableView.automaticDimension
+            $0.estimatedRowHeight = 200
         }
     }
     
     func bindViewModel() {
-        let dataSource = datasource()
-        
+
         let input = WatchNowViewModel.Input(
             loadTrigger: Driver.just(())
         )
         
         let output = viewModel.transform(input)
         
-        output.sections
-            .drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: rx.disposeBag)
+        output.items
+            .drive(tableView.rx.items) { tableView, index, item in
+                let indexPath = IndexPath(item: index, section: 0)
+                let cell: WatchNowTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.setContentForCell(item.title, item.movies)
+                return cell
+            }
+        .disposed(by: rx.disposeBag)
+        
     }
     
 }
 
 extension WatchNowViewController: StoryboardSceneBased {
     static var sceneStoryboard = Storyboards.watchNow
-}
-
-extension WatchNowViewController {
-    func datasource() -> DataSource<WacthNowSection> {
-        return .init(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
-            let cell : WatchNowTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.setContentForCell(dataSource[indexPath].title, movies: dataSource[indexPath].items)
-            return cell
-        })
-    }
 }
 
