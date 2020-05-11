@@ -11,6 +11,10 @@ protocol WatchNowUseCaseType {
     func getTopRatedMovies() -> Observable<[Movie]>
     func getPopularMovies() -> Observable<[Movie]>
     func getNowPlayingMovies() -> Observable<[Movie]>
+    func mergeItems(nowPlayingMovies: [Movie],
+                    topRatedMovies: [Movie],
+                    popularMovies: [Movie],
+                    upcomingMovies: [Movie]) -> [WatchNowCellType]
 }
 
 struct WatchNowUseCase: WatchNowUseCaseType {
@@ -35,5 +39,25 @@ struct WatchNowUseCase: WatchNowUseCaseType {
     func getNowPlayingMovies() -> Observable<[Movie]> {
         let request = NowPlayingRequest(page: 1)
         return repository.getNowPlayingMovies(input: request)
+    }
+    
+    func mergeItems(nowPlayingMovies: [Movie],
+                    topRatedMovies: [Movie],
+                    popularMovies: [Movie],
+                    upcomingMovies: [Movie]) -> [WatchNowCellType] {
+        
+        let nowPlayingMovies = WatchNowCellType(title: .nowPLaying,
+                                                movies: nowPlayingMovies)
+    
+        let topRatedMovies = WatchNowCellType(title: .topRated,
+                                               movies: topRatedMovies)
+        
+        let popularMovies = WatchNowCellType(title: .popular,
+                                             movies: popularMovies)
+        
+        let upcomingMovies = WatchNowCellType(title: .upcoming,
+                                              movies: upcomingMovies)
+        
+        return [nowPlayingMovies, topRatedMovies, popularMovies, upcomingMovies]
     }
 }

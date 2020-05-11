@@ -8,8 +8,14 @@
 
 // MARK: - DataSource
 struct WatchNowCellType {
-    var title: String
+    var title: CategoryType
     var movies: [Movie]
+}
+
+extension WatchNowCellType: Hashable {
+    static func == (lhs: WatchNowCellType, rhs: WatchNowCellType) -> Bool {
+        return lhs.title.rawValue == rhs.title.rawValue
+    }
 }
 
 struct WatchNowViewModel {
@@ -29,60 +35,49 @@ extension WatchNowViewModel: ViewModelType {
     }
     
     func transform(_ input: WatchNowViewModel.Input) -> WatchNowViewModel.Output {
-        let indicator = ActivityIndicator()
-        let error = ErrorTracker()
+        let errorTracker = ErrorTracker()
         
         let nowPlayingMovies = input.loadTrigger
             .flatMapLatest { _ in
                 return self.useCase.getNowPlayingMovies()
-                    .trackError(error)
-                    .trackActivity(indicator)
+                    .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()
-                
             }
         
         let topRatedMovies = input.loadTrigger
             .flatMapLatest { _ in
                 return self.useCase.getTopRatedMovies()
-                    .trackError(error)
-                    .trackActivity(indicator)
+                    .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()
             }
 
         let popularMovies = input.loadTrigger
             .flatMapLatest { _ in
                 return self.useCase.getPopularMovies()
-                    .trackError(error)
-                    .trackActivity(indicator)
+                    .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()
             }
 
         let upcomingMovies = input.loadTrigger
             .flatMapLatest { _ in
                 return self.useCase.getUpcomingMovies()
-                    .trackError(error)
-                    .trackActivity(indicator)
+                    .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()
             }
         
-        let items = Driver.combineLatest(nowPlayingMovies, topRatedMovies,
-                                         popularMovies, upcomingMovies)
-            .map { nowPlaying, topRated,
-                popular, upcoming -> [WatchNowCellType] in
-                self.mergeItems(nowPlaying, topRated,
-                                      popular, upcoming)
+        let items = Driver.combineLatest(nowPlayingMovies,
+                                         topRatedMovies,
+                                         popularMovies,
+                                         upcomingMovies)
+            .map { nowPlaying, topRated, popular, upcoming -> [WatchNowCellType] in
+                self.useCase.mergeItems(nowPlayingMovies: nowPlaying,
+                                        topRatedMovies: topRated,
+                                        popularMovies: popular,
+                                        upcomingMovies: upcoming)
             }
         
-        return Output(items: items)
-    }
-    
-    private func mergeItems(_ nowPlaying: [Movie],_ topRated: [Movie],
-                                  _ popular: [Movie],_ upcoming: [Movie]) -> [WatchNowCellType] {
-        let nowPlayingMovies = WatchNowCellType(title: "Now Playing", movies: nowPlaying)
-        let topRatedgMovies = WatchNowCellType(title: "Top Rated", movies: topRated)
-        let popularMovies = WatchNowCellType(title: "Popular", movies: popular)
-        let upcomingMovies = WatchNowCellType(title: "Upcoming", movies: upcoming)
-        
-        return [nowPlayingMovies, topRatedgMovies, popularMovies, upcomingMovies]
+        return Output(
+            items: items
+        )
     }
 }

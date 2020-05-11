@@ -8,7 +8,7 @@
 
 protocol WatchNowNavigatorType {
     func toMovieDetailScreen(movieId: Int)
-    func toSeeAllScreen()
+    func toSeeAllScreen(category: CategoryType)
 }
 
 struct WatchNowNavigator: WatchNowNavigatorType {
@@ -17,6 +17,6 @@ struct WatchNowNavigator: WatchNowNavigatorType {
     func toMovieDetailScreen(movieId: Int) {
     }
     
-    func toSeeAllScreen() {
+    func toSeeAllScreen(category: CategoryType) {
     }
 }
