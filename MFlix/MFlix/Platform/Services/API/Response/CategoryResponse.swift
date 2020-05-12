@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-final class CategoryResponse : BaseModel {
+final class CategoryResponse: BaseModel {
     var movies = [Movie]()
     var page = 0
     var totalPage = 0

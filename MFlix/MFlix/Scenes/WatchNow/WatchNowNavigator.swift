@@ -30,8 +30,8 @@ struct WatchNowNavigator: WatchNowNavigatorType {
         let useCase = SeeAllUseCase()
         let navigator = SeeAllNavigator(navigationController: navigationController)
         let viewModel = SeeAllViewModel(navigator: navigator,
-                                           useCase: useCase,
-                                           type: category)
+                                        useCase: useCase,
+                                        type: category)
         controller.bindViewModel(to: viewModel)
         navigationController.pushViewController(controller, animated: true)
     }

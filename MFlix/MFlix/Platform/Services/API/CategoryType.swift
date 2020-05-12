@@ -26,6 +26,7 @@ enum CategoryType {
             return URLs.API.nowPlaying
         }
     }
+    
     var title: String {
         switch self {
         case .popular:
