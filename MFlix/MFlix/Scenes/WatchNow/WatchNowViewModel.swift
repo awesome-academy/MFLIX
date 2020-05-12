@@ -8,13 +8,13 @@
 
 // MARK: - DataSource
 struct WatchNowCellType {
-    var title: CategoryType
+    var category: CategoryType
     var movies: [Movie]
 }
 
 extension WatchNowCellType: Hashable {
     static func == (lhs: WatchNowCellType, rhs: WatchNowCellType) -> Bool {
-        return lhs.title.rawValue == rhs.title.rawValue
+        return lhs.category.title == rhs.category.title
     }
 }
 

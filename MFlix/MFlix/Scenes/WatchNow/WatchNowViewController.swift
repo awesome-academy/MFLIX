@@ -54,7 +54,11 @@ final class WatchNowViewController: UIViewController, BindableType {
                 let cell: WatchNowTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.do {
                     $0.selectionStyle = .none
-                    $0.title = item.title
+                    $0.category = item.category
+                    $0.didSelectSeeAllButton = { [weak self] category in
+                        guard let category = category else { return }
+                        self?.viewModel.navigator.toSeeAllScreen(category: category)
+                    }
                 }
                 return cell
             }
@@ -85,6 +89,13 @@ extension WatchNowViewController: UICollectionViewDataSource {
         let cell: WatchNowCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setContentForCell(listCell[collectionView.tag].movies[indexPath.row])
         return cell
+    }
+}
+//MARK: - UICollectionViewDelegate
+extension WatchNowViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = listCell[collectionView.tag].movies[indexPath.row]
+        self.viewModel.navigator.toMovieDetailScreen(movie: movie)
     }
 }
 
