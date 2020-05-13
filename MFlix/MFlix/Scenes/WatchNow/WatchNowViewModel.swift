@@ -8,13 +8,13 @@
 
 // MARK: - DataSource
 struct WatchNowCellType {
-    var title: CategoryType
+    var category: CategoryType
     var movies: [Movie]
 }
 
 extension WatchNowCellType: Hashable {
     static func == (lhs: WatchNowCellType, rhs: WatchNowCellType) -> Bool {
-        return lhs.title.rawValue == rhs.title.rawValue
+        return lhs.category.title == rhs.category.title
     }
 }
 
@@ -28,10 +28,14 @@ extension WatchNowViewModel: ViewModelType {
 
     struct Input {
         let loadTrigger: Driver<Void>
+        let seeAllTrigger: Driver<CategoryType>
+        let movieDetailTrigger: Driver<Movie>
     }
     
     struct Output {
         let items: Driver<[WatchNowCellType]>
+        let seeAllSelected: Driver<Void>
+        let movieDetailSelected: Driver<Void>
     }
     
     func transform(_ input: WatchNowViewModel.Input) -> WatchNowViewModel.Output {
@@ -65,6 +69,18 @@ extension WatchNowViewModel: ViewModelType {
                     .asDriverOnErrorJustComplete()
             }
         
+        let seeAllSelected = input.seeAllTrigger
+            .do(onNext: { category in
+                self.navigator.toSeeAllScreen(category: category)
+            })
+            .mapToVoid()
+        
+        let movieDetailSelected = input.movieDetailTrigger
+            .do(onNext: { movie in
+                self.navigator.toMovieDetailScreen(movie: movie)
+            })
+            .mapToVoid()
+        
         let items = Driver.combineLatest(nowPlayingMovies,
                                          topRatedMovies,
                                          popularMovies,
@@ -77,7 +93,9 @@ extension WatchNowViewModel: ViewModelType {
             }
         
         return Output(
-            items: items
+            items: items,
+            seeAllSelected: seeAllSelected,
+            movieDetailSelected: movieDetailSelected
         )
     }
 }

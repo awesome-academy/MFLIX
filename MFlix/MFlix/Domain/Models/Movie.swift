@@ -32,6 +32,12 @@ struct Movie {
     }
 }
 
+extension Movie: Hashable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 extension Movie: BaseModel {
     init?(map: Map) {
         self.init()

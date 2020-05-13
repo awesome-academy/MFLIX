@@ -8,16 +8,63 @@
 
 final class WatchNowViewController: UIViewController, BindableType {
     
+    //MARK: - Variable
     @IBOutlet private weak var tableView: UITableView!
     private var listCell = [WatchNowCellType]()
     private var storedOffsets = [Int: CGFloat]()
+    
+    //MARK: - View Model
     var viewModel: WatchNowViewModel!
+    private let seeAllTrigger = PublishSubject<CategoryType>()
+    private let movieDetailTrigger = PublishSubject<Movie>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
     
+    func bindViewModel() {
+
+        let input = WatchNowViewModel.Input(
+            loadTrigger: Driver.just(()),
+            seeAllTrigger: seeAllTrigger.asDriverOnErrorJustComplete(),
+            movieDetailTrigger: movieDetailTrigger.asDriverOnErrorJustComplete()
+        )
+        
+        let output = viewModel.transform(input)
+        
+        output.items
+            .drive(tableView.rx.items) { [unowned self] tableView, index, item in
+                if !(self.listCell.contains(item)) {
+                    self.listCell.append(item)
+                }
+                let indexPath = IndexPath(item: index, section: 0)
+                let cell: WatchNowTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.do {
+                    $0.selectionStyle = .none
+                    $0.category = item.category
+                    $0.didSelectSeeAllButton = { [unowned self] category in
+                        if let category = category {
+                           self.seeAllTrigger.onNext(category)
+                        }
+                    }
+                }
+                return cell
+            }
+            .disposed(by: rx.disposeBag)
+        
+        output.seeAllSelected
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        output.movieDetailSelected
+            .drive()
+            .disposed(by: rx.disposeBag)
+    }
+}
+
+//MARK: - ConfigView
+extension WatchNowViewController {
     private func configView() {
         configNavigation()
         configTableView()
@@ -35,30 +82,6 @@ final class WatchNowViewController: UIViewController, BindableType {
             $0.delegate = self
             $0.estimatedRowHeight = 200
         }
-    }
-    
-    func bindViewModel() {
-
-        let input = WatchNowViewModel.Input(
-            loadTrigger: Driver.just(())
-        )
-        
-        let output = viewModel.transform(input)
-        
-        output.items
-            .drive(tableView.rx.items) { [weak self] tableView, index, item in
-                if !(self?.listCell.contains(item) ?? false) {
-                    self?.listCell.append(item)
-                }
-                let indexPath = IndexPath(item: index, section: 0)
-                let cell: WatchNowTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-                cell.do {
-                    $0.selectionStyle = .none
-                    $0.title = item.title
-                }
-                return cell
-            }
-            .disposed(by: rx.disposeBag)
     }
 }
 
@@ -85,6 +108,14 @@ extension WatchNowViewController: UICollectionViewDataSource {
         let cell: WatchNowCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.setContentForCell(listCell[collectionView.tag].movies[indexPath.row])
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+extension WatchNowViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = listCell[collectionView.tag].movies[indexPath.row]
+        movieDetailTrigger.onNext(movie)
     }
 }
 
