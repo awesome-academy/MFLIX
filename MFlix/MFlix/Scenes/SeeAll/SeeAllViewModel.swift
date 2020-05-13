@@ -24,7 +24,7 @@ extension SeeAllViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         
         let title = input.loadTrigger
-            .map{ _ in self.type.title }
+            .map { _ in self.type.title }
             .asDriver()
         
         return Output(

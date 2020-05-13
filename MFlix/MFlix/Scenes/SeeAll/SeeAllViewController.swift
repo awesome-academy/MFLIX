@@ -8,7 +8,10 @@
 
 final class SeeAllViewController: UIViewController, BindableType {
 
+    //MARK: - IBOutLet
     @IBOutlet private weak var collectionView: UICollectionView!
+    
+    //MARK: - View Model
     var viewModel: SeeAllViewModel!
     
     override func viewDidLoad() {
