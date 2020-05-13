@@ -16,7 +16,7 @@ struct Movie {
     private var backdropPath = ""
     
     var hasBackDropImage: Bool {
-        return backdropPath != ""
+        return !backdropPath.isEmpty
     }
     
     var posterImageOriginalUrl: String {

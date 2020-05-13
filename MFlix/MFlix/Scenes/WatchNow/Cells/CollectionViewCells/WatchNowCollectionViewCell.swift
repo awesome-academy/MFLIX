@@ -12,13 +12,10 @@ final class WatchNowCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet private weak var movieImageView: UIImageView!
     
     func setContentForCell(_ movie: Movie) {
+        let url = movie.hasBackDropImage ?
+            URL(string: movie.backdropImageW500Url) : URL(string: movie.posterImageW500Url)
+        
         titleLabel.text = movie.title
-        if movie.hasBackDropImage {
-            movieImageView.sd_setImage(with: URL(string: movie.backdropImageW500Url),
-                                       placeholderImage: Constants.imageMoviePlaceHolder)
-        } else {
-            movieImageView.sd_setImage(with: URL(string: movie.posterImageW500Url),
-                                       placeholderImage: Constants.imageMoviePlaceHolder)
-        }
+        movieImageView.sd_setImage(with: url, placeholderImage: Constants.imageMoviePlaceHolder)
     }
 }
