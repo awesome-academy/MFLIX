@@ -13,7 +13,8 @@ final class SeeAllCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet private weak var movieImageView: UIImageView!
 
     func setContentForCell(_ movie: Movie) {
-        movieImageView.sd_setImage(with: URL(string: movie.backdropImageW500Url),
-                                   placeholderImage: Constants.imageMoviePlaceHolder)
+        let url = movie.hasBackDropImage ?
+            URL(string: movie.backdropImageW500Url) : URL(string: movie.posterImageW500Url)
+        movieImageView.sd_setImage(with: url, placeholderImage: Constants.imageMoviePlaceHolder)
     }
 }

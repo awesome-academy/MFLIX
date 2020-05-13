@@ -15,6 +15,10 @@ struct Movie {
     private var posterPath = ""
     private var backdropPath = ""
     
+    var hasBackDropImage: Bool {
+        return !backdropPath.isEmpty
+    }
+    
     var posterImageOriginalUrl: String {
         return URLs.Image.original + posterPath
     }

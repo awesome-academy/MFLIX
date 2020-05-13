@@ -9,7 +9,7 @@
 final class SeeAllViewController: UIViewController, BindableType {
 
     //MARK: - IBOutLet
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: LoadMoreCollectionView!
     
     //MARK: - View Model
     var viewModel: SeeAllViewModel!
@@ -21,12 +21,44 @@ final class SeeAllViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
-        let input = SeeAllViewModel.Input(loadTrigger: Driver.just(()))
+        let input = SeeAllViewModel.Input(loadTrigger: Driver.just(()),
+                                          reloadTrigger: collectionView.refreshTrigger,
+                                          loadMoreTrigger: collectionView.loadMoreTrigger,
+                                          selectMovieTrigger: collectionView.rx.itemSelected.asDriver())
         
         let output = viewModel.transform(input)
         
+        output.movies
+            .drive(collectionView.rx.items) { collectionView, row, movie in
+                let indexPath = IndexPath(row: row, section: 0)
+                let cell: SeeAllCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.setContentForCell(movie)
+                return cell
+            }
+            .disposed(by: rx.disposeBag)
+        
         output.title
             .drive(navigationItem.rx.title)
+            .disposed(by: rx.disposeBag)
+        
+        output.error
+            .drive(rx.error)
+            .disposed(by: rx.disposeBag)
+        
+        output.isLoading
+            .drive(rx.isLoading)
+            .disposed(by: rx.disposeBag)
+        
+        output.isReloading
+            .drive(collectionView.isRefreshing)
+            .disposed(by: rx.disposeBag)
+        
+        output.isLoadingMore
+            .drive(collectionView.isLoadingMore)
+            .disposed(by: rx.disposeBag)
+        
+        output.movieSelected
+            .drive()
             .disposed(by: rx.disposeBag)
     }
 }
