@@ -13,7 +13,12 @@ final class WatchNowCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func setContentForCell(_ movie: Movie) {
         titleLabel.text = movie.title
-        movieImageView.sd_setImage(with: URL(string: movie.backdropImageW500Url),
-                                   placeholderImage: Constants.imageMoviePlaceHolder)
+        if movie.hasBackDropImage {
+            movieImageView.sd_setImage(with: URL(string: movie.backdropImageW500Url),
+                                       placeholderImage: Constants.imageMoviePlaceHolder)
+        } else {
+            movieImageView.sd_setImage(with: URL(string: movie.posterImageW500Url),
+                                       placeholderImage: Constants.imageMoviePlaceHolder)
+        }
     }
 }
