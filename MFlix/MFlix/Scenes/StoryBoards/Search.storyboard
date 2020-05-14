@@ -22,10 +22,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="CbO-cv-bh3" secondAttribute="bottom" id="64w-g6-LmV"/>
-                            <constraint firstItem="CbO-cv-bh3" firstAttribute="leading" secondItem="MNy-fL-8Lo" secondAttribute="leading" id="ENe-Xq-BdV"/>
+                            <constraint firstItem="MNy-fL-8Lo" firstAttribute="bottom" secondItem="CbO-cv-bh3" secondAttribute="bottom" id="64w-g6-LmV"/>
+                            <constraint firstItem="CbO-cv-bh3" firstAttribute="leading" secondItem="9Am-aV-BgM" secondAttribute="leading" id="ENe-Xq-BdV"/>
                             <constraint firstItem="CbO-cv-bh3" firstAttribute="top" secondItem="MNy-fL-8Lo" secondAttribute="top" id="dM8-mm-tB1"/>
-                            <constraint firstItem="CbO-cv-bh3" firstAttribute="trailing" secondItem="MNy-fL-8Lo" secondAttribute="trailing" id="ucp-Fu-JOU"/>
+                            <constraint firstItem="CbO-cv-bh3" firstAttribute="trailing" secondItem="9Am-aV-BgM" secondAttribute="trailing" id="ucp-Fu-JOU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MNy-fL-8Lo"/>
                     </view>

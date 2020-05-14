@@ -8,10 +8,12 @@
 
 extension UITableView {
     func setNoDataPlaceholder(_ message: String) {
-        let label = UILabel(frame: CGRect(x: 0, y: 0,
-                                          width: bounds.size.width,
-                                          height: bounds.size.height)).then {
+        let label = UILabel(
+                        frame: CGRect(x: 0, y: 0,
+                                      width: bounds.size.width,
+                                      height: bounds.size.height)).then {
             $0.text = message
+            $0.numberOfLines = 2
             $0.textAlignment = .center
             $0.sizeToFit()
         }

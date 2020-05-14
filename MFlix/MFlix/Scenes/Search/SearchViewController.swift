@@ -6,11 +6,18 @@
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-class SearchViewController: UIViewController, BindableType {
+final class SearchViewController: UIViewController, BindableType {
     
     //MARK: - Variable
     @IBOutlet private weak var tableView: LoadMoreTableView!
+    
     private var searchController: UISearchController!
+    
+    fileprivate enum Text: String {
+        case placeholder = "MFLix App"
+        case emptySearchBar = "Search Movie"
+        case emptyResult = "No results\nTry a different search"
+    }
     
     //MARK: - ViewModel
     var viewModel: SearchViewModel!
@@ -32,8 +39,7 @@ class SearchViewController: UIViewController, BindableType {
         output.movies
             .drive(tableView.rx.items) { tableView, index, item in
                 let indexPath = IndexPath(item: index, section: 0)
-                let cell: SearchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-                cell.do {
+                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SearchTableViewCell.self).then {
                     $0.selectionStyle = .none
                     $0.setContentForCell(item)
                 }
@@ -57,8 +63,12 @@ class SearchViewController: UIViewController, BindableType {
             .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         
-        output.isEmpty
-            .drive(tableView.rx.isEmpty(message: "Let find a movie"))
+        output.isEmptyMovie
+            .drive(tableView.rx.isEmpty(message: Text.emptyResult.rawValue))
+            .disposed(by: rx.disposeBag)
+        
+        output.isEmptyString
+            .drive(tableView.rx.isEmpty(message: Text.emptySearchBar.rawValue))
             .disposed(by: rx.disposeBag)
         
         output.error
@@ -79,7 +89,7 @@ extension SearchViewController {
     private func initSearchController() {
         searchController = UISearchController(searchResultsController: nil).then {
             $0.obscuresBackgroundDuringPresentation = false
-            $0.searchBar.placeholder = "MFlix app"
+            $0.searchBar.placeholder = Text.placeholder.rawValue
         }
     }
     

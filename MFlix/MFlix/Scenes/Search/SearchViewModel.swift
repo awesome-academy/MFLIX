@@ -25,29 +25,28 @@ extension SearchViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let isEmpty: Driver<Bool>
+        let isEmptyMovie: Driver<Bool>
+        let isEmptyString: Driver<Bool>
         let movieSelected: Driver<Movie>
     }
     
     func transform(_ input: Input) -> Output {
         
-        let loadTrigger = input.textSearch
+        let textTrigger = input.textSearch
             .distinctUntilChanged()
-            .asDriver()
         
         let reloadTrigger = input.reloadTrigger
-            .withLatestFrom(loadTrigger)
+            .withLatestFrom(textTrigger)
         
         let loadMoreTrigger = input.loadMoreTrigger
-            .withLatestFrom(loadTrigger)
+            .withLatestFrom(textTrigger)
         
-        let searchItems = getPage(loadTrigger: loadTrigger,
+        let searchItems = getPage(loadTrigger: textTrigger,
                                   reloadTrigger: reloadTrigger,
-                                  loadMoreTrigger: loadMoreTrigger) { (query, page) in
+                                  loadMoreTrigger: loadMoreTrigger) { query, page in
                                     self.useCase.loadMoreMovie(query: query, page: page)
-                                    
-        }
-        
+                                }
+
         let (page, error, isLoading, isReloading, isLoadingMore) = searchItems.destructured
         
         let movies = page
@@ -59,7 +58,11 @@ extension SearchViewModel: ViewModelType {
                 self.navigator.toMovieDetailScreen(movie: $0)
             })
         
-        let isEmpty = movies
+        let isEmptyMovie = movies
+            .map{ $0.isEmpty }
+            .distinctUntilChanged()
+        
+        let isEmptyString = input.textSearch
             .map{ $0.isEmpty }
             .distinctUntilChanged()
             
@@ -68,7 +71,8 @@ extension SearchViewModel: ViewModelType {
                       isLoading: isLoading,
                       isReloading: isReloading,
                       isLoadingMore: isLoadingMore,
-                      isEmpty: isEmpty,
+                      isEmptyMovie: isEmptyMovie,
+                      isEmptyString: isEmptyString,
                       movieSelected: movieSelected)
     }
 }

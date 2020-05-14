@@ -20,9 +20,11 @@ struct SearchUseCase: SearchUseCaseType {
     }
     
     func loadMoreMovie(query: String, page: Int) -> Observable<PagingInfo<Movie>> {
-        let text = query.isEmpty ? "abcdefghjklm" : query
-        let request = SearchRequest(query: text, page: page)
+        if query.isEmpty {
+            let emptyPage = PagingInfo<Movie>(page: 1, items: [])
+            return Observable<PagingInfo<Movie>>.just(emptyPage)
+        }
+        let request = SearchRequest(query: query, page: page)
         return repository.searchMovieList(input: request)
     }
 }
-

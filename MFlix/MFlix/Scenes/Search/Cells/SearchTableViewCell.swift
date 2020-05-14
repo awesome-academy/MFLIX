@@ -19,7 +19,10 @@ class SearchTableViewCell: UITableViewCell, NibReusable {
     }
     
     private func configView() {
-        self.separatorInset = .init(top: 0, left: movieImageView.frame.width + 30, bottom: 0, right: 20)
+        self.separatorInset = .init(top: 0,
+                                    left: movieImageView.frame.width + 30,
+                                    bottom: 0,
+                                    right: 20)
     }
     
     func setContentForCell(_ movie: Movie) {
