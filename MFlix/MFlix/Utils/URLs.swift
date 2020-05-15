@@ -22,5 +22,6 @@ enum URLs {
         static let nowPlaying = apiBaseURL + "/movie/now_playing"
         static let popular = apiBaseURL + "/movie/popular"
         static let topRated = apiBaseURL + "/movie/top_rated"
+        static let searchMovie = apiBaseURL + "/search/movie"
     }
 }
