@@ -5,7 +5,7 @@
 //  Created by Viet Anh on 5/15/20.
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
-import AVKit
+
 final class MovieDetailTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet private weak var sectionLabel: UILabel!
@@ -39,7 +39,8 @@ final class MovieDetailTableViewCell: UITableViewCell, NibReusable {
         }
     }
     
-    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, forRow row: Int) {
+    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate,
+                                             forRow row: Int) {
         collectionView.do {
             $0.delegate = dataSourceDelegate
             $0.dataSource = dataSourceDelegate

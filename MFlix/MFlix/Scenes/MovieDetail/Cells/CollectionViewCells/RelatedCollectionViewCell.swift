@@ -11,8 +11,9 @@ final class RelatedCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet private weak var movieImageView: UIImageView!
     
     func setContentForCell(_ movie: Movie) {
-        let url = movie.hasBackDropImage ?
-            URL(string: movie.backdropImageW500Url) : URL(string: movie.posterImageW500Url)
+        let url = movie.hasBackDropImage
+            ? URL(string: movie.backdropImageW500Url)
+            : URL(string: movie.posterImageW500Url)
         
         movieImageView.sd_setImage(with: url, placeholderImage: Constants.imageMoviePlaceHolder)
     }

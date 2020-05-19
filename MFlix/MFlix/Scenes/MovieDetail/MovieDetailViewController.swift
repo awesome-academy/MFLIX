@@ -6,7 +6,7 @@
 //  Copyright © 2020 VietAnh. All rights reserved.
 //
 
-final class MovieDetailViewController: UIViewController, BindableType, UITableViewDelegate {
+final class MovieDetailViewController: UIViewController, BindableType {
     
     //MARK: - IBOutlet
     @IBOutlet private weak var tableView: UITableView!
@@ -16,8 +16,12 @@ final class MovieDetailViewController: UIViewController, BindableType, UITableVi
     @IBOutlet private weak var descriptionTextView: UITextView!
     
     //MARK: - Varibale
-    private var listCell = [MovieDetailTableViewCellType]()
     private var storedOffsets = [Int: CGFloat]()
+    private var listCell = [MovieDetailTableViewCellType]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     //MARK: - View Model
     var viewModel: MovieDetailViewModel!
@@ -37,23 +41,12 @@ final class MovieDetailViewController: UIViewController, BindableType, UITableVi
             .disposed(by: rx.disposeBag)
         
         output.movieDetailSection
-            .drive(tableView.rx.items) { [unowned self] tableView, index, item in
-                if !(self.listCell.contains(item)) {
-                    self.listCell.append(item)
-                }
-                let indexPath = IndexPath(item: index, section: 0)
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MovieDetailTableViewCell.self).then {
-                    $0.selectionStyle = .none
-                    $0.section = item.section
-                    $0.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-                }
-                return cell
-            }
+            .drive(items)
             .disposed(by: rx.disposeBag)
         
         tableView.rx
             .didEndDisplayingCell
-            .subscribe(onNext: { cell, indexPath in
+            .subscribe(onNext: { [unowned self] cell, indexPath in
                 guard let tableViewCell = cell as? MovieDetailTableViewCell else { return }
                 self.storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
             })
@@ -81,6 +74,7 @@ extension MovieDetailViewController {
             $0.register(cellType: MovieDetailTableViewCell.self)
             $0.rowHeight = UITableView.automaticDimension
             $0.delegate = self
+            $0.dataSource = self
         }
     }
     
@@ -90,8 +84,9 @@ extension MovieDetailViewController {
         descriptionTextView.text = movie.overview
         genresLabel.text = movie.genres.map { $0.name }.joined(separator: " · ")
         
-        let url = movie.hasBackDropImage ?
-            URL(string: movie.backdropImageW500Url) : URL(string: movie.posterImageW500Url)
+        let url = movie.hasBackDropImage
+            ? URL(string: movie.backdropImageW500Url)
+            : URL(string: movie.posterImageW500Url)
         movieImageView.sd_setImage(with: url)
     }
 }
@@ -103,6 +98,33 @@ extension MovieDetailViewController {
             vc.updateView(from: movieDetail)
         }
     }
+    
+    private var items: Binder<[MovieDetailTableViewCellType]> {
+        return Binder(self) { vc, listCell in
+            vc.listCell = listCell
+        }
+    }
+}
+
+//MARK: - UITableViewDataSource
+extension MovieDetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listCell.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath,cellType: MovieDetailTableViewCell.self).then {
+            [unowned self] in
+            $0.selectionStyle = .none
+            $0.section = listCell[indexPath.row].section
+            $0.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+        }
+        return cell
+    }
+}
+
+//MARK: - UITableViewDelegate
+extension MovieDetailViewController: UITableViewDelegate {
 }
 
 //MARK: - UICollectionViewDataSource
@@ -112,24 +134,21 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch listCell[collectionView.tag].items {
-        case let movies as [Movie]:
+        switch listCell[collectionView.tag] {
+        case .related(let movies):
             let cell: RelatedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.setContentForCell(movies[indexPath.row])
             return cell
 
-        case let actors as [Person]:
+        case .cast(let actors):
             let cell: CastCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.setContentForCell(actors[indexPath.row])
             return cell
             
-        case let videos as [Video]:
+        case .trailer(let videos):
             let cell: TrailerCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.setContentForCell(videos[indexPath.row])
             return cell
-            
-        default:
-            return UICollectionViewCell()
         }
     }
 }
@@ -140,19 +159,16 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
                          layout collectionViewLayout: UICollectionViewLayout,
                          sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        switch listCell[collectionView.tag].items {
-        case _ as [Movie], _ as [Video]:
+        switch listCell[collectionView.tag] {
+        case .related, .trailer:
             let width = collectionView.frame.width * 0.7
             let height = collectionView.frame.height
             return CGSize(width: width, height: height)
             
-        case _ as [Person]:
+        case .cast:
             let width = collectionView.frame.width * 1 / 3
             let height = collectionView.frame.height
             return CGSize(width: width, height: height)
-            
-        default:
-            return CGSize(width: 0, height: 0)
         }
     }
 }

@@ -23,17 +23,6 @@ enum MovieDetailTableViewCellType {
         }
     }
     
-    var items: Any {
-        switch self {
-        case .cast(let cast):
-            return cast
-        case .related(let movies):
-            return movies
-        case .trailer(let videos):
-            return videos
-        }
-    }
-    
     var numberOfItems: Int {
         switch self {
         case .cast(let cast):
@@ -77,13 +66,48 @@ extension MovieDetailViewModel: ViewModelType {
                 .asDriverOnErrorJustComplete()
             }
         
-        let movieDetailSection = input.loadTrigger
+        let cast = input.loadTrigger
             .flatMapLatest { _ in
-                self.useCase.getMovieDetailSection(of: self.movie)
+                self.useCase.getCastForMovie(movie: self.movie)
                 .asDriverOnErrorJustComplete()
             }
         
+        let similarMovies = input.loadTrigger
+            .flatMapLatest { _ in
+                self.useCase.getSimilarMovies(movie: self.movie)
+                .asDriverOnErrorJustComplete()
+            }
+        
+        let trailersVideo = input.loadTrigger
+            .flatMapLatest { _ in
+                self.useCase.getTrailersMovie(movie: self.movie)
+                .asDriverOnErrorJustComplete()
+            }
+        
+        let movieDetailSection = Driver.combineLatest(cast, similarMovies, trailersVideo)
+            .map { self.combineLastest(from: $0, $1, $2) }
+        
         return Output(movieDetail: movieDetail,
                       movieDetailSection: movieDetailSection)
+    }
+    
+    private func combineLastest(from cast: [Person],
+                                _ similarMovies: [Movie],
+                                _ trailersVideo: [Video]) -> [MovieDetailTableViewCellType] {
+        var array: [MovieDetailTableViewCellType] = []
+        
+        if !trailersVideo.isEmpty {
+            array.append(.trailer(videos: trailersVideo))
+        }
+        
+        if !similarMovies.isEmpty {
+            array.append(.related(movies: similarMovies))
+        }
+        
+        if !cast.isEmpty {
+            array.append(.cast(cast: cast))
+        }
+        
+        return array
     }
 }
