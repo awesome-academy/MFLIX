@@ -19,6 +19,10 @@ struct MovieDetail {
     private var backdropPath = ""
     private var posterPath = ""
     
+    var hasBackDropImage: Bool {
+        return !backdropPath.isEmpty
+    }
+    
     var posterImageOriginalUrl: String {
         return URLs.Image.original + posterPath
     }
@@ -52,6 +56,5 @@ extension MovieDetail: BaseModel {
         tagline <- map["tagline"]
         title <- map["title"]
         hasVideo <- map["video"]
-        
     }
 }

@@ -23,4 +23,5 @@ enum Constants {
     static let watchNowFilled = UIImage(systemName: "tv.fill")
     
     static let imageMoviePlaceHolder = UIImage(named: "movie_placeholder")
+    static let imagePersonPlaceHolder = UIImage(named: "person_placeholder")
 }
