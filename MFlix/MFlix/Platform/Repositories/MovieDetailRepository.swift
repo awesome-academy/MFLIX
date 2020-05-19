@@ -10,6 +10,7 @@ protocol MovieDetailRepositoryType {
     func getMovieDetail(input: MovieDetailRequest) -> Observable<MovieDetail>
     func getCastForMovie(input: MovieActorsRequest) -> Observable<[Person]>
     func getSimilarMovies(input: SimilarMoviesRequest) -> Observable<[Movie]>
+    func getTrailersMovie(input: TrailersMovieRequest) -> Observable<[Video]>
 }
 
 final class MovieDetailRepository: MovieDetailRepositoryType {
@@ -31,6 +32,13 @@ final class MovieDetailRepository: MovieDetailRepositoryType {
         return api.request(input: input)
             .map { (response: CategoryResponse) in
                 return response.movies
+            }
+    }
+    
+    func getTrailersMovie(input: TrailersMovieRequest) -> Observable<[Video]> {
+        return api.request(input: input)
+            .map { (response: TrailersMovieResponse) in
+                return response.videos
             }
     }
 }

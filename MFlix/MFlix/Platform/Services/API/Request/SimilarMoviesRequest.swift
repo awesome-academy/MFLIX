@@ -12,6 +12,7 @@ final class SimilarMoviesRequest: BaseRequest {
         let body: [String: Any] = [
             "api_key": APIKey.apiKey
         ]
-        super.init(url: URLs.API.movie + "/\(movie.id)/similar", requestType: .get, body: body)
+        let urlString = String(format: URLs.API.similarMovies, movie.id)
+        super.init(url: urlString, requestType: .get, body: body)
     }
 }
