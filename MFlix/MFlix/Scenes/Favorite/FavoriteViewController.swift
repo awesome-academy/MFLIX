@@ -8,7 +8,10 @@
 
 final class FavoriteViewController: UIViewController, BindableType {
     
+    //MARK: - Variable
     @IBOutlet private weak var tableView: UITableView!
+    
+    //MARK: - ViewModel
     var viewModel: FavoriteViewModel!
     
     override func viewDidLoad() {

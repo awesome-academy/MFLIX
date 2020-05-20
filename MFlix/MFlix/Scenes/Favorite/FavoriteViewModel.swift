@@ -30,7 +30,7 @@ extension FavoriteViewModel: ViewModelType {
         let movies = input.loadTrigger
             .flatMapLatest { _ in
                 self.useCase.getAllMovies()
-                .asDriverOnErrorJustComplete()
+                    .asDriverOnErrorJustComplete()
             }
         
         let selectedMovie = input.selectedMovieTrigger
@@ -40,7 +40,7 @@ extension FavoriteViewModel: ViewModelType {
             })
         
         let isEmptyMovie = movies
-            .map{ $0.isEmpty }
+            .map { $0.isEmpty }
             .distinctUntilChanged()
         
         let deletedMovie = input.deletedMovieTrigger
@@ -51,7 +51,7 @@ extension FavoriteViewModel: ViewModelType {
             }
             .flatMapLatest {
                 self.useCase.delete($0)
-                .asDriverOnErrorJustComplete()
+                    .asDriverOnErrorJustComplete()
             }
         
         return Output(movies: movies,
