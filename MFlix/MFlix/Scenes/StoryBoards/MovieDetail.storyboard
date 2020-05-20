@@ -40,8 +40,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horror · Science Fiction · Action · Thriller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sF7-iH-raQ">
-                                            <rect key="frame" x="71.5" y="272" width="271.5" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horror · Science Fiction · Action · Thriller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sF7-iH-raQ">
+                                            <rect key="frame" x="30" y="272" width="354" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -57,8 +57,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="sF7-iH-raQ" firstAttribute="centerX" secondItem="hVa-K0-lvY" secondAttribute="centerX" id="NmT-eu-bbs"/>
                                         <constraint firstItem="JDS-s5-Bee" firstAttribute="top" secondItem="VHg-b6-dEO" secondAttribute="bottom" constant="20" id="PRC-1F-6lk"/>
+                                        <constraint firstAttribute="trailing" secondItem="sF7-iH-raQ" secondAttribute="trailing" constant="30" id="Qch-UX-68T"/>
                                         <constraint firstAttribute="bottom" secondItem="pzT-Dk-oIy" secondAttribute="bottom" constant="20" id="VVs-uL-coS"/>
                                         <constraint firstItem="VHg-b6-dEO" firstAttribute="leading" secondItem="hVa-K0-lvY" secondAttribute="leading" constant="30" id="Var-IN-tkM"/>
                                         <constraint firstItem="JDS-s5-Bee" firstAttribute="centerX" secondItem="hVa-K0-lvY" secondAttribute="centerX" id="X7d-mC-Cjj"/>
@@ -66,6 +66,7 @@
                                         <constraint firstAttribute="trailing" secondItem="JDS-s5-Bee" secondAttribute="trailing" constant="30" id="a9v-Pp-Y6w"/>
                                         <constraint firstItem="JDS-s5-Bee" firstAttribute="leading" secondItem="hVa-K0-lvY" secondAttribute="leading" constant="30" id="bYl-8c-gvs"/>
                                         <constraint firstAttribute="trailing" secondItem="VHg-b6-dEO" secondAttribute="trailing" constant="30" id="gTA-Ut-OCt"/>
+                                        <constraint firstItem="sF7-iH-raQ" firstAttribute="leading" secondItem="hVa-K0-lvY" secondAttribute="leading" constant="30" id="gkk-4c-OEP"/>
                                         <constraint firstItem="pzT-Dk-oIy" firstAttribute="leading" secondItem="hVa-K0-lvY" secondAttribute="leading" constant="30" id="ldM-QO-Qpg"/>
                                         <constraint firstAttribute="trailing" secondItem="pzT-Dk-oIy" secondAttribute="trailing" constant="30" id="mhz-2B-c6I"/>
                                         <constraint firstItem="VHg-b6-dEO" firstAttribute="top" secondItem="hVa-K0-lvY" secondAttribute="top" constant="40" id="o5e-e7-SHn"/>

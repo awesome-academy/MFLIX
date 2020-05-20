@@ -19,6 +19,10 @@ target 'MFlix' do
     pod 'OrderedSet'
     pod 'Validator'
     
+    # Realm database
+    pod 'RealmSwift'
+    pod 'RxRealm'
+    
     # Rx
     pod 'NSObject+Rx'
     pod 'RxDataSources'
@@ -29,4 +33,5 @@ target 'MFlix' do
     #
     pod 'MBProgressHUD'
     pod 'SDWebImage'
+    pod 'YoutubeKit'
 end
