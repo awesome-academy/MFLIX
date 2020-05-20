@@ -7,9 +7,32 @@
 //
 
 protocol MovieDetailNavigatorType {
-    
+    func toMovieDetailScreen(movie: Movie)
+    func toTrailerVideoScreen(video: Video)
 }
 
 struct MovieDetailNavigator: MovieDetailNavigatorType {
     unowned let navigationController: UINavigationController
+    
+    func toMovieDetailScreen(movie: Movie) {
+        let controller = MovieDetailViewController.instantiate()
+        let useCase = MovieDetailUseCase()
+        let navigator = MovieDetailNavigator(navigationController: navigationController)
+        let viewModel = MovieDetailViewModel(navigator: navigator,
+                                             useCase: useCase,
+                                             movie: movie)
+        controller.bindViewModel(to: viewModel)
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func toTrailerVideoScreen(video: Video) {
+        let player = YTSwiftyPlayer(frame: .zero, playerVars: [.videoID(video.key)])
+        let _ = UIViewController().then {
+            $0.view = player
+            player.autoplay = true
+            navigationController.present($0, animated: true) {
+                player.loadPlayer()
+            }
+        }
+    }
 }

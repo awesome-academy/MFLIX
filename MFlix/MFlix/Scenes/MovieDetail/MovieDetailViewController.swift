@@ -22,9 +22,17 @@ final class MovieDetailViewController: UIViewController, BindableType {
             tableView.reloadData()
         }
     }
+    private var favoriteBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(systemName: "heart"),
+                               style: .plain,
+                               target: nil,
+                               action: nil)
+    }()
     
     //MARK: - View Model
     var viewModel: MovieDetailViewModel!
+    private let trailerVideoTrigger = PublishSubject<Video>()
+    private let movieDetailTrigger = PublishSubject<Movie>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +40,10 @@ final class MovieDetailViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
-        let input = MovieDetailViewModel.Input(loadTrigger: Driver.just(()))
+        let input = MovieDetailViewModel.Input(loadTrigger: Driver.just(()),
+                                               buttonFavoriteTrigger: favoriteBarButton.rx.tap.asDriver(),
+                                               movieDetailTrigger: movieDetailTrigger.asDriverOnErrorJustComplete(),
+                                               trailerVideoTrigger: trailerVideoTrigger.asDriverOnErrorJustComplete())
         
         let output = viewModel.transform(input)
         
@@ -42,6 +53,18 @@ final class MovieDetailViewController: UIViewController, BindableType {
         
         output.movieDetailSection
             .drive(items)
+            .disposed(by: rx.disposeBag)
+        
+        output.movieDetailSelected
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        output.trailerVideoSelected
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        output.buttonFavoriteSelected
+            .drive(self.trackingFavoriteButton)
             .disposed(by: rx.disposeBag)
         
         tableView.rx
@@ -64,8 +87,7 @@ extension MovieDetailViewController {
     private func configNavigationItem() {
         navigationItem.do {
             $0.largeTitleDisplayMode = .never
-            $0.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"),
-                                                    style: .done, target: nil, action: nil)
+            $0.rightBarButtonItem = favoriteBarButton
         }
     }
     
@@ -104,6 +126,17 @@ extension MovieDetailViewController {
             vc.listCell = listCell
         }
     }
+    
+    private var trackingFavoriteButton: Binder<Bool> {
+        return Binder(self) { vc, favorite in
+            let systemName = favorite ? "heart.fill" : "heart"
+            vc.favoriteBarButton.image = UIImage(systemName: systemName)
+        }
+    }
+}
+
+//MARK: - UITableViewDelegate
+extension MovieDetailViewController: UITableViewDelegate {
 }
 
 //MARK: - UITableViewDataSource
@@ -123,8 +156,21 @@ extension MovieDetailViewController: UITableViewDataSource {
     }
 }
 
-//MARK: - UITableViewDelegate
-extension MovieDetailViewController: UITableViewDelegate {
+//MARK: - UICollectionViewDelegate
+extension MovieDetailViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch listCell[collectionView.tag] {
+        case .trailer(let videos):
+            let video = videos[indexPath.row]
+            trailerVideoTrigger.onNext(video)
+            
+        case .related(let movies):
+            let movie = movies[indexPath.row]
+            movieDetailTrigger.onNext(movie)
+        default:
+            break
+        }
+    }
 }
 
 //MARK: - UICollectionViewDataSource

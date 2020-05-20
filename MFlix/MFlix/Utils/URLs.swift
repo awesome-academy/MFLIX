@@ -10,6 +10,8 @@ import Foundation
 
 enum URLs {
     
+    static let imageYoutube = "https://img.youtube.com/vi/%@/hqdefault.jpg"
+    
     enum Image {
         static let original = "https://image.tmdb.org/t/p/original"
         static let w500 = "https://image.tmdb.org/t/p/w500"
