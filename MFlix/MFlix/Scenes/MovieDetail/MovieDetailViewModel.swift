@@ -35,12 +35,6 @@ enum MovieDetailTableViewCellType {
     }
 }
 
-extension MovieDetailTableViewCellType: Equatable {
-    static func == (lhs: MovieDetailTableViewCellType, rhs: MovieDetailTableViewCellType) -> Bool {
-        return lhs.section == rhs.section
-    }
-}
-
 //MARK: - View Model
 struct MovieDetailViewModel {
     let navigator: MovieDetailNavigatorType
@@ -51,11 +45,17 @@ struct MovieDetailViewModel {
 extension MovieDetailViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
+        let buttonFavoriteTrigger: Driver<Void>
+        let movieDetailTrigger: Driver<Movie>
+        let trailerVideoTrigger: Driver<Video>
     }
     
     struct Output {
         let movieDetail: Driver<MovieDetail>
         let movieDetailSection: Driver<[MovieDetailTableViewCellType]>
+        let movieDetailSelected: Driver<Void>
+        let trailerVideoSelected: Driver<Void>
+        let buttonFavoriteSelected: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
@@ -84,11 +84,33 @@ extension MovieDetailViewModel: ViewModelType {
                 .asDriverOnErrorJustComplete()
             }
         
+        let trailerVideoSelected = input.trailerVideoTrigger
+            .do(onNext: {
+                self.navigator.toTrailerVideoScreen(video: $0)
+            })
+            .mapToVoid()
+        
+        let movieDetailSelected = input.movieDetailTrigger
+            .do(onNext: {
+                self.navigator.toMovieDetailScreen(movie: $0)
+            })
+            .mapToVoid()
+        
         let movieDetailSection = Driver.combineLatest(cast, similarMovies, trailersVideo)
             .map { self.combineLastest(from: $0, $1, $2) }
         
+        let buttonFavoriteSelected = input.buttonFavoriteTrigger
+            .flatMapLatest { _ in
+                self.useCase.toggleFavoriteButton(movie: self.movie)
+                    .asDriverOnErrorJustComplete()
+            }
+            .startWith(useCase.getStatusMovie(movie: self.movie))
+        
         return Output(movieDetail: movieDetail,
-                      movieDetailSection: movieDetailSection)
+                      movieDetailSection: movieDetailSection,
+                      movieDetailSelected: movieDetailSelected,
+                      trailerVideoSelected: trailerVideoSelected,
+                      buttonFavoriteSelected: buttonFavoriteSelected)
     }
     
     private func combineLastest(from cast: [Person],

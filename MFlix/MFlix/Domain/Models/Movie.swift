@@ -8,12 +8,13 @@
 
 import ObjectMapper
 
-struct Movie {
-    var id = 0
-    var originalTitle = ""
-    var title = ""
-    private var posterPath = ""
-    private var backdropPath = ""
+final class Movie: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var originalTitle = ""
+    @objc dynamic var title = ""
+    @objc dynamic private var posterPath = ""
+    @objc dynamic private var backdropPath = ""
+    @objc dynamic var addRealmDate = Date()
     
     var hasBackDropImage: Bool {
         return !backdropPath.isEmpty
@@ -34,20 +35,18 @@ struct Movie {
     var backdropImageW500Url: String {
         return URLs.Image.w500 + backdropPath
     }
-}
-
-extension Movie: Hashable {
-    static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id
+    
+    override class func primaryKey() -> String? {
+        return "id"
     }
 }
 
 extension Movie: BaseModel {
-    init?(map: Map) {
+    convenience init?(map: Map) {
         self.init()
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         posterPath <- map["poster_path"]
         id <- map["id"]
         backdropPath <- map["backdrop_path"]

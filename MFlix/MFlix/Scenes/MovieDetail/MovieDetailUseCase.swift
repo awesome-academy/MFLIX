@@ -11,11 +11,14 @@ protocol MovieDetailUseCaseType {
     func getCastForMovie(movie: Movie) -> Observable<[Person]>
     func getSimilarMovies(movie: Movie) -> Observable<[Movie]>
     func getTrailersMovie(movie: Movie) -> Observable<[Video]>
+    func getStatusMovie(movie: Movie) -> Bool
+    func toggleFavoriteButton(movie: Movie) -> Observable<Bool>
 }
 
 struct MovieDetailUseCase: MovieDetailUseCaseType {
 
     private let repository = MovieDetailRepository()
+    private let favoriteRepository = FavoriteRepository()
     
     func getMovieDetail(movie: Movie) -> Observable<MovieDetail> {
         let request = MovieDetailRequest(movie: movie)
@@ -35,5 +38,17 @@ struct MovieDetailUseCase: MovieDetailUseCaseType {
     func getTrailersMovie(movie: Movie) -> Observable<[Video]> {
         let request = TrailersMovieRequest(movie: movie)
         return repository.getTrailersMovie(input: request)
+    }
+    
+    func getStatusMovie(movie: Movie) -> Bool {
+        return favoriteRepository.checkExist(movie)
+    }
+    
+    func toggleFavoriteButton(movie: Movie) -> Observable<Bool> {
+        if favoriteRepository.checkExist(movie) {
+            return favoriteRepository.delete(movie)
+        }
+        return favoriteRepository.add(movie)
+            .map { _ in true }
     }
 }

@@ -14,6 +14,7 @@ struct Video {
     var name = ""
     var site = ""
     var type = ""
+    var size = 0
 }
 
 extension Video: BaseModel {
@@ -27,5 +28,6 @@ extension Video: BaseModel {
         name <- map["name"]
         site <- map["site"]
         type <- map["type"]
+        size <- map["size"]
     }
 }

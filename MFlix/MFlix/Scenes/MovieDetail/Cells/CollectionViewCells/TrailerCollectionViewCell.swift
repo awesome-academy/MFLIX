@@ -13,5 +13,7 @@ final class TrailerCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func setContentForCell(_ video: Video) {
         typeVideoLabel.text = video.type
+        let url = URL(string: String(format: URLs.imageYoutube, video.key))
+        videoImageView.sd_setImage(with: url, placeholderImage: Constants.imageMoviePlaceHolder)
     }
 }
