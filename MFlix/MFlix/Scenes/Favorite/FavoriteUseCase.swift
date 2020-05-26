@@ -12,7 +12,7 @@ protocol FavoriteUseCaseType {
 }
 
 struct FavoriteUseCase: FavoriteUseCaseType {
-    private let repository = FavoriteRepository()
+    let repository: FavoriteRepositoryType
     
     func getAllMovies() -> Observable<[Movie]> {
         return repository.getAllMovies()

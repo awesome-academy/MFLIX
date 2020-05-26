@@ -19,7 +19,7 @@ protocol WatchNowUseCaseType {
 
 struct WatchNowUseCase: WatchNowUseCaseType {
     
-    private let repository = WatchNowRepository()
+    let repository: WatchNowRepositoryType
     
     func getUpcomingMovies() -> Observable<[Movie]> {
         let request = CategoryRequest(category: .upcoming)

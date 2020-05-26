@@ -13,7 +13,7 @@ protocol SearchUseCaseType {
 
 struct SearchUseCase: SearchUseCaseType {
 
-    private let repository = SearchRepository()
+    let repository: SearchRepositoryType
     
     func searchListMovie(query: String) -> Observable<PagingInfo<Movie>> {
         return loadMoreMovie(query: query, page: 1)
