@@ -7,18 +7,18 @@
 //
 
 protocol SearchAssembler {
-    func resolve(viewController: SearchViewController) -> UINavigationController
+    func resolve(navigationController: UINavigationController) -> SearchViewController
     func resolve(navigationController: UINavigationController) -> SearchViewModel
     func resolve(navigationController: UINavigationController) -> SearchNavigatorType
     func resolve() -> SearchUseCaseType
 }
 
 extension SearchAssembler {
-    func resolve(viewController: SearchViewController) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: viewController)
+    func resolve(navigationController: UINavigationController) -> SearchViewController {
+        let viewController = SearchViewController.instantiate()
         let viewModel: SearchViewModel = resolve(navigationController: navigationController)
         viewController.bindViewModel(to: viewModel)
-        return navigationController
+        return viewController
     }
     
     func resolve(navigationController: UINavigationController) -> SearchViewModel {

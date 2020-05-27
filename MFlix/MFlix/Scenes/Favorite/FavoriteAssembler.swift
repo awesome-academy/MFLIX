@@ -7,18 +7,18 @@
 //
 
 protocol FavoriteAssembler {
-    func resolve(viewController: FavoriteViewController) -> UINavigationController
+    func resolve(navigationController: UINavigationController) -> FavoriteViewController
     func resolve(navigationController: UINavigationController) -> FavoriteViewModel
     func resolve(navigationController: UINavigationController) -> FavoriteNavigatorType
     func resolve() -> FavoriteUseCaseType
 }
 
 extension FavoriteAssembler {
-    func resolve(viewController: FavoriteViewController) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: viewController)
+    func resolve(navigationController: UINavigationController) -> FavoriteViewController {
+        let viewController = FavoriteViewController.instantiate()
         let viewModel: FavoriteViewModel = resolve(navigationController: navigationController)
         viewController.bindViewModel(to: viewModel)
-        return navigationController
+        return viewController
     }
     
     func resolve(navigationController: UINavigationController) -> FavoriteViewModel {

@@ -7,18 +7,18 @@
 //
 
 protocol WatchNowAssembler {
-    func resolve(viewController: WatchNowViewController) -> UINavigationController
+    func resolve(navigationController: UINavigationController) -> WatchNowViewController
     func resolve(navigationController: UINavigationController) -> WatchNowViewModel
     func resolve(navigationController: UINavigationController) -> WatchNowNavigatorType
     func resolve() -> WatchNowUseCaseType
 }
 
 extension WatchNowAssembler {
-    func resolve(viewController: WatchNowViewController) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: viewController)
+    func resolve(navigationController: UINavigationController) -> WatchNowViewController {
+        let viewController = WatchNowViewController.instantiate()
         let viewModel: WatchNowViewModel = resolve(navigationController: navigationController)
         viewController.bindViewModel(to: viewModel)
-        return navigationController
+        return viewController
     }
     
     func resolve(navigationController: UINavigationController) -> WatchNowViewModel {
