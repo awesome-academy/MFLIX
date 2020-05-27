@@ -7,18 +7,33 @@
 //
 
 protocol FavoriteAssembler {
-    func resolve(navigationController: UINavigationController) -> FavoriteViewController
+    func resolve(type: FavoriteViewController.Type) -> UINavigationController
+    func resolve(type: FavoriteViewController.Type) -> UITabBarItem
+    func resolve() -> FavoriteViewController
     func resolve(navigationController: UINavigationController) -> FavoriteViewModel
     func resolve(navigationController: UINavigationController) -> FavoriteNavigatorType
     func resolve() -> FavoriteUseCaseType
 }
 
 extension FavoriteAssembler {
-    func resolve(navigationController: UINavigationController) -> FavoriteViewController {
-        let viewController = FavoriteViewController.instantiate()
+    func resolve(type: FavoriteViewController.Type) -> UINavigationController {
+        let viewController: FavoriteViewController = resolve()
+        let navigationController = UINavigationController(rootViewController: viewController).then {
+            $0.tabBarItem = resolve(type: FavoriteViewController.self)
+        }
         let viewModel: FavoriteViewModel = resolve(navigationController: navigationController)
         viewController.bindViewModel(to: viewModel)
-        return viewController
+        return navigationController
+    }
+    
+    func resolve(type: FavoriteViewController.Type) -> UITabBarItem {
+       return UITabBarItem(title: Constants.favoriteString,
+                           image: Constants.favoriteIcon,
+                           selectedImage: Constants.favoriteFilled)
+    }
+    
+    func resolve() -> FavoriteViewController {
+        return FavoriteViewController.instantiate()
     }
     
     func resolve(navigationController: UINavigationController) -> FavoriteViewModel {

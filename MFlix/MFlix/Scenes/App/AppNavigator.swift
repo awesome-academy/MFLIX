@@ -15,35 +15,9 @@ struct AppNavigator: AppNavigatorType {
     unowned let window: UIWindow
     
     func toMainTabBar() {
-        //MARK: - Watch Now
-        let watchNowNavigationController = UINavigationController().then {
-            $0.navigationBar.prefersLargeTitles = true
-            $0.tabBarItem = UITabBarItem(title: Constants.watchNowString,
-                                         image: Constants.watchNowIcon,
-                                         selectedImage: Constants.watchNowFilled)
-        }
-        let watchNowViewController: WatchNowViewController = assembler.resolve(navigationController: watchNowNavigationController)
-        watchNowNavigationController.viewControllers.append(watchNowViewController)
-
-        //MARK: - Favorite
-        let favoriteNavigationController = UINavigationController().then {
-            $0.navigationBar.prefersLargeTitles = true
-            $0.tabBarItem = UITabBarItem(title: Constants.favoriteString,
-                                         image: Constants.favoriteIcon,
-                                         selectedImage: Constants.favoriteFilled)
-        }
-        let favoriteViewController: FavoriteViewController = assembler.resolve(navigationController: favoriteNavigationController)
-        favoriteNavigationController.viewControllers.append(favoriteViewController)
-
-        //MARK: - Search
-        let searchNavigationController = UINavigationController().then {
-            $0.navigationBar.prefersLargeTitles = true
-            $0.tabBarItem = UITabBarItem(title: Constants.searchString,
-                                         image: Constants.searchIcon,
-                                         selectedImage: Constants.searchFilled)
-        }
-        let searchViewController: SearchViewController = assembler.resolve(navigationController: searchNavigationController)
-        searchNavigationController.viewControllers.append(searchViewController)
+        let watchNowNavigationController: UINavigationController = assembler.resolve(type: WatchNowViewController.self)
+        let favoriteNavigationController: UINavigationController = assembler.resolve(type: FavoriteViewController.self)
+        let searchNavigationController: UINavigationController = assembler.resolve(type: SearchViewController.self)
 
         //MARK: - TabBar
         let mainTabBarController = UITabBarController().then {

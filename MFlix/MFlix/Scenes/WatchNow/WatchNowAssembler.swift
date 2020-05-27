@@ -7,18 +7,33 @@
 //
 
 protocol WatchNowAssembler {
-    func resolve(navigationController: UINavigationController) -> WatchNowViewController
+    func resolve(type: WatchNowViewController.Type) -> UINavigationController
+    func resolve(type: WatchNowViewController.Type) -> UITabBarItem
+    func resolve() -> WatchNowViewController
     func resolve(navigationController: UINavigationController) -> WatchNowViewModel
     func resolve(navigationController: UINavigationController) -> WatchNowNavigatorType
     func resolve() -> WatchNowUseCaseType
 }
 
 extension WatchNowAssembler {
-    func resolve(navigationController: UINavigationController) -> WatchNowViewController {
-        let viewController = WatchNowViewController.instantiate()
+    func resolve(type: WatchNowViewController.Type) -> UINavigationController {
+        let viewController: WatchNowViewController = resolve()
+        let navigationController = UINavigationController(rootViewController: viewController).then {
+            $0.tabBarItem = resolve(type: WatchNowViewController.self)
+        }
         let viewModel: WatchNowViewModel = resolve(navigationController: navigationController)
         viewController.bindViewModel(to: viewModel)
-        return viewController
+        return navigationController
+    }
+    
+    func resolve(type: WatchNowViewController.Type) -> UITabBarItem {
+        return UITabBarItem(title: Constants.watchNowString,
+                            image: Constants.watchNowIcon,
+                            selectedImage: Constants.watchNowFilled)
+    }
+    
+    func resolve() -> WatchNowViewController {
+        return WatchNowViewController.instantiate()
     }
     
     func resolve(navigationController: UINavigationController) -> WatchNowViewModel {
