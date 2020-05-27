@@ -11,16 +11,12 @@ protocol SeeAllNavigatorType {
 }
 
 struct SeeAllNavigator: SeeAllNavigatorType {
+    unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
     
     func toMovieDetailScreen(movie: Movie) {
-        let controller = MovieDetailViewController.instantiate()
-        let useCase = MovieDetailUseCase()
-        let navigator = MovieDetailNavigator(navigationController: navigationController)
-        let viewModel = MovieDetailViewModel(navigator: navigator,
-                                             useCase: useCase,
-                                             movie: movie)
-        controller.bindViewModel(to: viewModel)
+        let controller: MovieDetailViewController = assembler.resolve(navigationController: navigationController,
+                                                                      movie: movie)
         navigationController.pushViewController(controller, animated: true)
     }
 }

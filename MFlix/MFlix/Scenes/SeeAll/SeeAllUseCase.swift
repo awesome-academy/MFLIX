@@ -13,7 +13,7 @@ protocol SeeAllUseCaseType {
 
 struct SeeAllUseCase: SeeAllUseCaseType {
     
-    private let repository = SeeAllRepository()
+    let seeAllRepository: SeeAllRepositoryType
     
     func getListMovie(category: CategoryType) -> Observable<PagingInfo<Movie>> {
         return loadMoreMovie(category: category, page: 1)
@@ -21,6 +21,6 @@ struct SeeAllUseCase: SeeAllUseCaseType {
     
     func loadMoreMovie(category: CategoryType, page: Int) -> Observable<PagingInfo<Movie>> {
         let request = CategoryRequest(category: category, page: page)
-        return repository.getMovieList(input: request)
+        return seeAllRepository.getMovieList(input: request)
     }
 }

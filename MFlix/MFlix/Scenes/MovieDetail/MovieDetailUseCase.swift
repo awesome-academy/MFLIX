@@ -17,8 +17,8 @@ protocol MovieDetailUseCaseType {
 
 struct MovieDetailUseCase: MovieDetailUseCaseType {
 
-    private let repository = MovieDetailRepository()
-    private let favoriteRepository = FavoriteRepository()
+    let repository: MovieDetailRepositoryType
+    let favoriteRepository: FavoriteRepositoryType
     
     func getMovieDetail(movie: Movie) -> Observable<MovieDetail> {
         let request = MovieDetailRequest(movie: movie)

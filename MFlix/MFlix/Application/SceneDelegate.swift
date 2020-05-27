@@ -11,6 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    var assembler: Assembler = DefaultAssembler()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -19,10 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func bindViewModel() {
         guard let window = window else { return }
-        let navigator = AppNavigator(window: window)
-        let useCase = AppUseCase()
-        let viewModel = AppViewModel(navigator: navigator, useCase: useCase)
-        
+        let viewModel: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
         let output = viewModel.transform(input)
         output.toMainTabBar
